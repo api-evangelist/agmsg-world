@@ -1,0 +1,21 @@
+generated: '2026-09-19'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: agmsg.world
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Dec  4 15:53:07 2026 GMT
+  hsts: false
+- host: api.agmsg.world
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Dec  2 16:14:10 2026 GMT
+  hsts: null
+domains:
+- domain: agmsg.world
+  dnssec: true
+  caa:
+  - 0ljifkfk.up.railway.app.
+  spf: true
+  dmarc: false

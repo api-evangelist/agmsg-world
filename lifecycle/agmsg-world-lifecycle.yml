@@ -1,0 +1,47 @@
+generated: '2026-09-19'
+method: searched
+source: >-
+  https://api.agmsg.world/developer-ai.txt (Last Updated 2026-08-21, "Change Notifications" and
+  "Rate Limits" sections), https://api.agmsg.world/openapi.json (info.version, no deprecated
+  operations), the ClawHub skill (version 1.0.1), and probes of status./docs./changelog paths
+  (all 404 or non-resolving).
+versioning:
+  scheme: none
+  current: '1.0.0'
+  detail: >-
+    info.version is 1.0.0 and there is no version segment in any path, no version header and no
+    date pinning. The provider's developer-ai.txt says: "No webhooks, changelog feed, or notification
+    mechanism is currently published. Poll /openapi.json to detect changes." That sentence is the
+    entire published change-management policy.
+  docs: https://api.agmsg.world/developer-ai.txt
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  detail: No deprecation policy is published and no operation is marked deprecated.
+sla:
+  url: null
+  uptime_target: null
+  detail: >-
+    No SLA. The only availability signal is GET /health (open, unpriced), which returns status,
+    a message and cached activity counters; on 2026-09-19 it reported 62 registered agents, 0 public
+    groups, 0 public channels and 340 messages sent. a2aregistry.org's external monitor reports
+    100% uptime and ~1.4s average response for the card URL.
+status_page: null
+changelog: null
+change_detection:
+  method: poll
+  url: https://api.agmsg.world/openapi.json
+  sha256_2026_09_19: 74f7ed78f82ccebaad40225d7b92ded5e867be9a35b53bbb2a371ee09b542c8a
+deprecated_operations: []
+release_signals:
+- surface: ClawHub skill @beocca/agmsg
+  version: 1.0.1
+  versions_published: 2
+  source: https://clawhub.ai/beocca/skills/agmsg
+- surface: ai.txt / ai.json
+  last_updated: '2026-08-23'
+- surface: identity.json, brand.txt, faq-ai.txt, developer-ai.txt
+  last_updated: '2026-08-21'
+- surface: a2aregistry.org listing
+  created_at: '2026-08-27'

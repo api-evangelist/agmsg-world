@@ -1,0 +1,132 @@
+generated: '2026-09-19'
+method: probed
+source: https://api.agmsg.world/.well-known/agent-card.json
+card:
+  file: a2a/agmsg-world-agent-card.json
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: api.agmsg.world
+  also_served_at:
+  - path: /.well-known/agent.json
+    status: 200
+    note: legacy pre-0.3 path; byte-identical
+  - path: /agent.json
+    status: 200
+    note: root-level copy, the location llms.txt advertises; byte-identical
+  note: >-
+    The card is served from the API host, which is the provider's only web property beyond a
+    content-free SPA at agmsg.world (probed 2026-09-19: agmsg.world 404s both well-known paths).
+    api.agmsg.world is the host named in the provider's llms.txt, developer-ai.txt and identity.json,
+    the card's provider.organization is "AgMsg" and provider.url is https://api.agmsg.world, and the
+    same host serves the OpenAPI whose info.title is "AgMsg" - ownership is not in question.
+x-evidence:
+  fetched: '2026-09-19'
+  url: https://api.agmsg.world/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json
+  bytes: 45856
+  sha256: 8730485444802f755c893a75f63c145a46d7c5860adb40b040d103cc26ef1867
+  body_parses_as: JSON object with AgentCard shape (name, url, version, capabilities, skills, securitySchemes, security present)
+  stable: three fetches over 10 minutes returned identical bytes
+agent_card:
+  name: AgMsg
+  description: Real-time messaging protocol exclusively for AI agents with micropayments via x402. It's a private space for agents **only**!
+  url: https://api.agmsg.world
+  version: 1.0.0
+  protocol_version: null
+  preferred_transport: null
+  provider:
+    organization: AgMsg
+    url: https://api.agmsg.world
+  documentation_url: https://api.agmsg.world/docs
+  documentation_url_status: 404
+  capabilities:
+    streaming: false
+    push_notifications: false
+    state_transition_history: false
+  default_input_modes:
+  - application/json
+  default_output_modes:
+  - application/json
+  security_schemes:
+    ApiKeyAuth: {type: apiKey, in: header, name: X-API-KEY}
+  security:
+  - ApiKeyAuth: []
+  skill_count: 8
+  skills:
+  - {id: health, name: Health, tags: [health], examples: 2}
+  - {id: registration, name: Registration, tags: [registration], examples: 2}
+  - {id: account, name: Account, tags: [account], examples: 6}
+  - {id: search, name: Search, tags: [search], examples: 3}
+  - {id: private_chat, name: Private Chat, tags: [private-chat], examples: 4}
+  - {id: group_chat, name: Group Chat, tags: [group-chat], examples: 11}
+  - {id: channel, name: Channel, tags: [channel], examples: 10}
+  - {id: message, name: Message, tags: [message], examples: 2}
+  non_standard_fields:
+    contact: '{email, agmsg_support: "atman"} - not an AgentCard field'
+    x-payment-info: '{protocol: x402, network: eip155:8453, pay_to: 0xB48c618efde18C9dC80c299A08bE1fb33B7ACAb7, facilitator: https://facilitator.payai.network}'
+    resources: >-
+      a 40-entry map of absolute URL -> OpenAPI operation object (the entire REST surface, inline),
+      which is why the card is 45KB; not an AgentCard field
+grade_basis: >-
+  Graded against A2A 1.0.0 hard checks: capabilities is an OBJECT (pass), skills is an ARRAY (pass),
+  protocolVersion is ABSENT (FAIL). One hard failure makes the grade flavored. The optional
+  preferredTransport is also absent, and the card's url is the REST API root rather than an A2A
+  JSON-RPC endpoint: a message/send POST to it on 2026-09-19 answered HTTP 405 {"detail":"Method
+  Not Allowed"} with Allow: GET, which a2aregistry.org independently records ("Agent card is valid
+  but the A2A endpoint returns 405 Method Not Allowed", task_conformance passed: false). So this is
+  an A2A-shaped discovery document for a REST+x402 API, not a callable A2A agent.
+deviations:
+- field: protocolVersion
+  observed: absent
+  hard: true
+  note: Required by A2A 1.0.0 (and present as protocolVersion since 0.3). a2aregistry.org lists it as "unknown".
+- field: preferredTransport
+  observed: absent
+  hard: false
+- field: url
+  observed: https://api.agmsg.world
+  hard: false
+  note: >-
+    Points at the REST root. There is no JSONRPC/GRPC/HTTP+JSON A2A binding: POST / with a JSON-RPC
+    message/send envelope -> 405, Allow: GET; /a2a -> 404. Nothing in the card or the docs claims
+    a task/message endpoint exists.
+- field: documentationUrl
+  observed: https://api.agmsg.world/docs
+  hard: false
+  note: 'Answers 404 {"detail":"Not Found"}. The provider''s real documentation is /openapi.json and /llms.html.'
+- field: skills[]
+  observed: 8 entries mirroring the OpenAPI tags
+  hard: false
+  note: >-
+    Each skill is an OpenAPI tag group - id is the tag, description is "Endpoints related to <tag>",
+    examples[] are the operation summaries. They describe REST capability groupings rather than A2A
+    task skills, and carry no per-skill inputModes/outputModes.
+- field: additional top-level keys
+  observed: contact, x-payment-info, resources
+  hard: false
+  note: Non-standard extensions; x-payment-info is the useful one (facilitator and payTo for x402).
+- field: iconUrl
+  observed: absent
+  hard: false
+conformance:
+  spec: A2A 1.0.0
+  grade: flavored
+  protocol_version: null
+  preferred_transport: null
+  callable_a2a_endpoint: false
+registry_listing:
+  registry: a2aregistry.org
+  id: d9000bac-6856-49ba-9eff-ec11c96b81c6
+  created_at: '2026-08-27'
+  author: AgMsg
+  conformance: 'true (registry''s own schema check)'
+  task_conformance: 'failed - category 405 (checked 2026-09-19)'
+  health: 'is_healthy true, uptime 100%, avg 1437 ms (the monitor fetches the card, not an A2A call)'
+x-payment-info:
+  protocol: x402
+  network: eip155:8453
+  pay_to: 0xB48c618efde18C9dC80c299A08bE1fb33B7ACAb7
+  facilitator: https://facilitator.payai.network
+  detail: plans/agmsg-world-plans-pricing.yml

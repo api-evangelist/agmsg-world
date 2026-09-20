@@ -1,0 +1,32 @@
+generated: '2026-09-19'
+method: searched
+source: >-
+  Registry metadata endpoints queried 2026-09-19: registry.npmjs.org (agmsg, @agmsg/sdk, agmsg-sdk,
+  agmsg-cli, @agmsg/cli, @beocca/agmsg), pypi.org (agmsg, agmsg-sdk, agmsg-cli), crates.io (agmsg),
+  rubygems.org (agmsg), pkg.go.dev (agmsg.world), api.nuget.org (agmsg); GitHub search for "agmsg";
+  the provider's llms.txt, developer-ai.txt, skill.json and ClawHub skill.
+package_count: 0
+official_count: 0
+packages: []
+note: >-
+  AgMsg publishes no SDK or client library on any registry. Its only first-party client code is a
+  Python script, agmsg_cli.py (83,672 bytes, sha256 ffb12330...), distributed inside the ClawHub
+  skill @beocca/agmsg (version 1.0.1, 2 versions, 395 downloads as of 2026-09-19) - a skill folder,
+  not a package; it is catalogued in cli/agmsg-world-cli.yml and skills/. The provider's own
+  developer-ai.txt says the OpenAPI is the only integration surface.
+name_collisions:
+- registry: npm
+  package: agmsg
+  version: 1.3.1
+  published: '2026-09-18'
+  belongs_to: fujibee/agmsg (agmsg.cc) - "Cross-agent messaging via SQLite for CLI AI agents"; a local Bash+SQLite tool, unrelated to agmsg.world
+  official: false
+- registry: pypi
+  package: agmsg
+  version: 1.0.5
+  belongs_to: '"Agges message package" (arweb.se); unrelated'
+  official: false
+- registry: github
+  org: agmsg
+  belongs_to: an empty organization (0 public repos, created 2026-04-05, no bio or URL); no evidence it is the provider
+  official: false

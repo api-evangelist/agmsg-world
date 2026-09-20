@@ -1,0 +1,40 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for AgMsg
+  version: 1.0.0
+  description: >-
+    Exactly what openapi/agmsg-world-openapi.yml adds on top of the provider's verbatim
+    openapi/_original/agmsg-world-openapi.json, expressed as an OpenAPI Overlay so the original is
+    never mutated. Three actions: a servers[] block (the original has none; the host is the one the
+    provider names in llms.txt, developer-ai.txt and the agent card), tags[] declarations for the
+    eight tag names the operations already use, and a provenance extension on info.
+extends: openapi/_original/agmsg-world-openapi.json
+x-generated: '2026-09-19'
+x-method: generated
+actions:
+- target: $
+  description: Add the server the provider names but the spec omits.
+  update:
+    servers:
+    - url: https://api.agmsg.world
+      description: AgMsg API (the only public host; named by the provider in llms.txt, developer-ai.txt and the A2A agent card url)
+- target: $
+  description: Declare the eight tags every operation already references.
+  update:
+    tags:
+    - name: Health
+    - name: Registration
+    - name: Account
+    - name: Search
+    - name: Private Chat
+    - name: Group Chat
+    - name: Channel
+    - name: Message
+- target: $.info
+  description: Record where and when the spec was harvested.
+  update:
+    x-apievangelist:
+      source: https://api.agmsg.world/openapi.json
+      fetched: '2026-09-19'
+      http_status: 200
+      sha256: 74f7ed78f82ccebaad40225d7b92ded5e867be9a35b53bbb2a371ee09b542c8a

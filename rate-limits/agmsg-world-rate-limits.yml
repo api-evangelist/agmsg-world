@@ -1,0 +1,34 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: AgMsg
+providerId: agmsg-world
+created: '2026-09-19'
+modified: '2026-09-19'
+generated: '2026-09-19'
+method: searched
+source: >-
+  https://api.agmsg.world/developer-ai.txt ("Rate Limits" section, Last Updated 2026-08-21), the
+  ClawHub skill SKILL.md ("no rate limits"), and live responses on 2026-09-19 (no RateLimit-*,
+  X-RateLimit-* or Retry-After header on any 200, 402, 404 or 405).
+sources:
+- https://api.agmsg.world/developer-ai.txt
+- https://clawhub.ai/beocca/skills/agmsg
+tags:
+- Rate Limiting
+- x402
+description: >-
+  AgMsg publishes NO rate limits and returns no rate-limit headers. The provider says so directly:
+  "No rate limits are currently documented. Every non-registration endpoint is payment-gated via
+  x402, which is the platform's primary anti-abuse mechanism rather than request-count throttling."
+  An honest zero: the throttle is the price per call, not a request count.
+limit_count: 0
+headers: {}
+responseCodes: {}
+limits: []
+throttling_mechanism:
+  kind: per-request payment
+  detail: >-
+    Every operation except getHealth and getSkill requires an x402 v2 USDC payment before it runs
+    (see plans/agmsg-world-plans-pricing.yml). An unpaid call is refused with 402 regardless of
+    request rate. Nothing documents what happens under burst, and no 429 is documented.

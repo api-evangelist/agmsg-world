@@ -1,0 +1,172 @@
+generated: '2026-09-19'
+method: probed
+source: >-
+  Live unauthenticated GET of every named /.well-known/ path on both hosts the record knows
+  (the apex agmsg.world, which is the Website, and api.agmsg.world, which is the only API host,
+  the OpenAPI host and the agent-card host) on 2026-09-19, with one negative-control request per
+  host. There is no docs host, no MCP host and no OAuth authorization server to probe: the
+  provider's own developer-ai.txt states "AgMsg operates a single public web property: the API".
+note: >-
+  api.agmsg.world serves an A2A agent card at BOTH the canonical /.well-known/agent-card.json and
+  the legacy /.well-known/agent.json (identical bytes, sha256 8730485444802f75...); it is graded in
+  a2a/agmsg-world-a2a.yml (flavored: no protocolVersion). Nothing else under /.well-known/ is
+  served on either host - no security.txt, no OIDC/OAuth discovery, no api-catalog, no apis.json,
+  no ai-plugin.json, no AAuth, no UCP/ACP. Both hosts answer a real 404 at an impossible path, so
+  the hits are not catch-all echoes. The provider DOES publish a large discovery surface, but at the
+  API ROOT rather than under /.well-known/ - llms.txt plus the ai-visibility.org.uk ADF family
+  (ai.txt, ai.json, identity.json, brand.txt, faq-ai.txt, developer-ai.txt) and a skill.json - and
+  those are recorded under root_discovery below and saved verbatim in llms/ so they are not mistaken
+  for well-known documents.
+hosts:
+- host: agmsg.world
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /robots.txt
+    status: 404
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/agmsg-world-negative-control-9f2c1ab7.json
+    status: 404
+    bytes: 555
+  note: >-
+    The apex is a Vite single-page app (one <div id="app"> and a JS bundle) whose canonical and
+    Open Graph tags still read https://YOUR_DOMAIN/ - a template placeholder the operator never
+    filled in. It answers a real HTML 404 (555 bytes) for every path but /, so it is not a catch-all.
+    www.agmsg.world does not resolve.
+- host: api.agmsg.world
+  documents:
+  - path: /.well-known/agent-card.json
+    status: 200
+    content_type: application/json
+    bytes: 45856
+    file: ../a2a/agmsg-world-agent-card.json
+    note: A2A Agent Card (canonical path); graded flavored in a2a/agmsg-world-a2a.yml.
+  - path: /.well-known/agent.json
+    status: 200
+    content_type: application/json
+    bytes: 45856
+    file: ../a2a/agmsg-world-agent-card.json
+    note: Legacy pre-0.3 path; byte-identical to the canonical document, so not saved twice.
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/api-catalog.json
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /robots.txt
+    status: 404
+  path_echo_control: passed
+  soft_404_control:
+    path: /.well-known/agmsg-world-negative-control-9f2c1ab7.json
+    status: 404
+    bytes: 22
+    body: '{"detail":"Not Found"}'
+  note: >-
+    FastAPI host (per developer-ai.txt) behind Railway (server: railway-hikari). Unmatched paths
+    answer a real JSON 404, so the two 200s are genuine documents.
+  root_discovery:
+    note: >-
+      Real published discovery documents served from the API root, NOT /.well-known/. Recorded so
+      the surface is visible, but none of them is a well-known document and none counts as one.
+    documents:
+    - path: /llms.txt
+      status: 200
+      content_type: text/plain
+      file: ../llms/agmsg-world-llms.txt
+      spec: llms.txt (ADF-001 profile)
+    - path: /llm.txt
+      status: 200
+      note: byte-identical alias of /llms.txt
+    - path: /llms.html
+      status: 200
+      content_type: text/html
+      file: ../llms/agmsg-world-llms.html
+      note: human-readable mirror of llms.txt; the only HTML documentation page the provider serves
+    - path: /ai.txt
+      status: 200
+      file: ../llms/agmsg-world-ai.txt
+      spec: ai.txt (ADF-004) - AI usage permissions and restrictions, dated 2026-08-23
+    - path: /ai.json
+      status: 200
+      file: ../llms/agmsg-world-ai.json
+      spec: ai.json (machine-readable twin of ai.txt)
+    - path: /identity.json
+      status: 200
+      file: ../llms/agmsg-world-identity.json
+      spec: identity.json (ai-visibility.org.uk) - structured business identity
+    - path: /brand.txt
+      status: 200
+      file: ../llms/agmsg-world-brand.txt
+      spec: brand.txt (ADF-007)
+    - path: /faq-ai.txt
+      status: 200
+      file: ../llms/agmsg-world-faq-ai.txt
+      spec: faq-ai.txt (ADF-008)
+    - path: /developer-ai.txt
+      status: 200
+      file: ../llms/agmsg-world-developer-ai.txt
+      spec: developer-ai.txt (ADF-009) - technical context; states there are no rate limits, no webhooks and no changelog
+    - path: /skill.json
+      status: 200
+      file: ../llms/agmsg-world-skill.json
+      note: points at the provider's ClawHub skill (clawhub.ai/beocca/skills/agmsg); /skill is a byte-identical alias
+    - path: /agent.json
+      status: 200
+      note: byte-identical to /.well-known/agent-card.json; the location llms.txt advertises for the card
+    - path: /openapi.json
+      status: 200
+      file: ../openapi/_original/agmsg-world-openapi.json
+      note: OpenAPI 3.1.0, 40 operations; the provider calls it its canonical documentation
+    - path: /docs
+      status: 404
+      note: 'the agent card''s documentationUrl; answers {"detail":"Not Found"}'
+hit_count: 2

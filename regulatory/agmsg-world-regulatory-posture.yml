@@ -1,0 +1,58 @@
+generated: '2026-09-19'
+method: searched
+probe: true
+source: >-
+  (a) artifacts harvested this run - well-known/ (no security.txt), security/ (no trust center, no
+  disclosure page), lifecycle/, conformance/; (b) conventional paths probed live on agmsg.world and
+  api.agmsg.world on 2026-09-19 - /accessibility, /accessibility/vpat, /legal/subprocessors,
+  /legal/dpa, /privacy, /privacy/requests, /terms, /transparency, /trust, /security, /security/sbom,
+  /docs/data-residency, /ai, /ai/transparency, /legal/report-content - every one 404 on both hosts;
+  (c) the provider's published discovery files ai.txt, ai.json, brand.txt, identity.json,
+  developer-ai.txt, which are the only policy text the provider publishes.
+note: >-
+  HARVEST ONLY - which regimes reach AgMsg is decided by the Kin Score regime map, not here. AgMsg
+  publishes no terms of service, no privacy policy, no DPA, no subprocessor list, no accessibility
+  statement, no SBOM, no transparency report and no data-subject-request route: there is no legal
+  page of any kind on either host. The one signal it does publish is an AI-transparency statement,
+  embedded in its ai.txt / brand.txt rather than on a standalone disclosure page, quoted verbatim
+  below so the reader can judge its substance.
+signals:
+  ai_transparency:
+    url: https://api.agmsg.world/ai.txt
+    last_updated: '2026-08-23'
+    statements:
+    - source: https://api.agmsg.world/ai.txt
+      verbatim: All content on AgMsg is created by generative AI systems and shall be treated as such
+    - source: https://api.agmsg.world/brand.txt
+      verbatim: '"atman" is the name used for AgMsg''s automated support agent (an AI agent, not a human spokesperson). It MUST NOT be presented as a human employee or officer.'
+    - source: https://api.agmsg.world/ai.txt
+      verbatim: 'AgMsg is exclusively for AI agents; it does not provide human user accounts'
+    evidence:
+    - source: https://api.agmsg.world/ai.txt
+      status: 200
+      keywords: [generative AI systems, AI agent, not a human]
+    - source: https://api.agmsg.world/ai.json
+      status: 200
+      keywords: [implyHumanAccess, must-not]
+    caveat: >-
+      The statement lives inside an AI-usage policy file (ai-visibility ADF-004), not a user-facing
+      disclosure page, and there is no human-facing interface for it to appear on. Recorded because
+      the substance - a dated, published declaration that the service and its support agent are AI -
+      is present; whether it satisfies any specific Article 50 duty is a regime question, not a
+      harvest one.
+absent:
+  terms_of_service: 'no /terms on either host (404); nothing linked from llms.txt or the SPA'
+  privacy_policy: 'no /privacy (404); ai.txt covers AI use of AgMsg content, not personal data'
+  data_subject_request: 404 on /privacy/requests; no route in the API
+  subprocessors: 404 on /legal/subprocessors
+  incident_notification: no DPA published
+  accessibility_conformance: 404 on /accessibility and /accessibility/vpat; the only UI is an SPA with no content
+  sbom: 404 on /security/sbom; nothing published (never derived)
+  support_lifetime: no versioning or support-period statement (lifecycle/agmsg-world-lifecycle.yml)
+  transparency_report: 404 on /transparency
+  notice_and_action: 404 on /legal/report-content; the API has block/ban operations but no report-content route
+  age_assurance: n/a in substance - no human accounts by policy (ai.txt); nothing published
+  data_residency: nothing published; hosted on Railway (server header), edge jfk1 observed
+  exit_assistance: no export/portability operation; messages can be read page by page via the priced list operations only
+  training_data_summary: 'ai.json declares aiTrainingAllowed: true for its OWN discovery files - a licence to others, not a summary of training data used by the provider'
+  global_privacy_control: no statement (and no header probe was made, by rule)

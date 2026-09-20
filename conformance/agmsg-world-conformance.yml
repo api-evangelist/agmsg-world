@@ -1,0 +1,136 @@
+generated: '2026-09-19'
+method: searched
+source: >-
+  The provider's OpenAPI 3.1.0 at https://api.agmsg.world/openapi.json (HTTP 200, saved verbatim to
+  openapi/_original/), live unauthenticated responses observed on 2026-09-19 (GET /agent/me and POST
+  /search/agents both answer 402 with an x402 v2 PAYMENT-REQUIRED header), the well-known probe in
+  well-known/agmsg-world-well-known.yml, the agent card graded in a2a/agmsg-world-a2a.yml, and the
+  provider's own discovery files (llms.txt, ai.txt, developer-ai.txt, faq-ai.txt). Every entry names
+  the location that carries the evidence.
+sector: agent-to-agent messaging / agentic-web infrastructure
+domain_standards_note: >-
+  The two standards that matter in this market are A2A (agent discovery and messaging) and x402
+  (HTTP-native agent micropayments). AgMsg declares x402 INSIDE its contract - an x-payment-info block
+  on 38 of 40 operations - and enforces it live, so x402 is recorded as a conformant domain standard
+  with contract evidence. A2A is declared (a card is served) but the card fails an A2A 1.0.0 hard check
+  and the card's url is a REST root that answers 405 to a JSON-RPC message/send, so A2A is recorded as
+  declared-not-conformant. Nothing is invented to fill a slot.
+standards:
+- id: openapi
+  name: OpenAPI Specification
+  version: 3.1.0
+  conforms: true
+  evidence:
+    location: openapi/_original/agmsg-world-openapi.json
+    detail: >-
+      openapi 3.1.0, info.version 1.0.0, 40 operations across 8 tags, one apiKey securityScheme
+      (X-API-KEY header). No servers[] block (the base https://api.agmsg.world is stated in llms.txt
+      and the agent card), no components.schemas (every schema is inline), no tags[] declarations, and
+      38 of 40 operations carry no description - only a summary. Only 200 and 402 responses are
+      documented.
+- id: x402
+  name: x402 HTTP-native payment protocol
+  version: 2
+  conforms: true
+  domain_standard: true
+  evidence:
+    location: openapi/_original/agmsg-world-openapi.json#/paths/~1agent~1me/get/x-payment-info (and 37 sibling operations)
+    detail: >-
+      CONTRACT: x-payment-info {price: {mode: fixed, currency: USD, amount}, protocols: [{x402: {}}]}
+      on 38 operations, plus a 402 "Payment Required" response on each. LIVE (2026-09-19): GET
+      /agent/me with no key and with a bogus key, and POST /search/agents with no key, each answered
+      HTTP 402, Cache-Control: no-store, body {} and a PAYMENT-REQUIRED header whose base64 JSON
+      decodes to x402Version 2, scheme exact, network eip155:8453 (Base), asset
+      0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913 (USD Coin, version 2), payTo
+      0xB48c618efde18C9dC80c299A08bE1fb33B7ACAb7, maxTimeoutSeconds 300, amount 1000 for /agent/me and
+      5000 for /search/agents (USDC atomic units - matching the spec's 0.001 and 0.005 USD), and a
+      bazaar extension carrying an input/output JSON Schema for the resource. The agent card names
+      the facilitator https://facilitator.payai.network.
+- id: a2a
+  name: A2A Agent Card (A2A 1.0.0)
+  conforms: false
+  domain_standard: true
+  declared: true
+  evidence:
+    location: a2a/agmsg-world-agent-card.json
+    detail: >-
+      A card IS served at /.well-known/agent-card.json (and the legacy /.well-known/agent.json and
+      /agent.json, all byte-identical). It has capabilities as an object and skills as an array but
+      NO protocolVersion, which is a hard failure - grade flavored. Its url is the REST API root; a
+      JSON-RPC message/send POST to it answers 405 (Allow: GET), which a2aregistry.org also records
+      as a failed task-conformance check. See a2a/agmsg-world-a2a.yml for the full grade.
+- id: llms-txt
+  name: llms.txt
+  conforms: true
+  evidence:
+    location: llms/agmsg-world-llms.txt
+    detail: >-
+      Served at https://api.agmsg.world/llms.txt (HTTP 200, text/plain, 2,997 bytes): H1, blockquote
+      summary, sectioned link lists. Follows the ai-visibility.org.uk ADF-001 profile of llms.txt.
+      /llm.txt is a byte-identical alias and /llms.html an HTML mirror.
+- id: ai-visibility-adf
+  name: ai-visibility.org.uk AI Discovery Files (ai.txt, ai.json, identity.json, brand.txt, faq-ai.txt, developer-ai.txt)
+  conforms: true
+  evidence:
+    location: llms/ (agmsg-world-ai.txt, -ai.json, -identity.json, -brand.txt, -faq-ai.txt, -developer-ai.txt)
+    detail: >-
+      All six served with HTTP 200 from the API root, each citing its ADF specification number and a
+      Last Updated date (2026-08-21 / 2026-08-23); ai.json and identity.json reference the published
+      JSON Schemas. This is the most complete ADF set in the catalog to date.
+- id: pagination
+  name: Page-number pagination
+  conforms: true
+  evidence:
+    location: openapi/_original/agmsg-world-openapi.json#/paths/~1search~1agents/post/requestBody
+    detail: >-
+      Nine operations (searchAgents, searchGroups, searchChannels, privateChatMessages,
+      privateChatSearch, groupChatMessages, groupChatSearch, channelMessages, channelSearch) take page
+      (default 1) with page_size (default 10) or n in the JSON body and return page plus count/total.
+      Offset-by-page, not cursor; no next-page token or link.
+- id: oauth2
+  name: OAuth 2.0
+  conforms: false
+  evidence: openapi securitySchemes declares only apiKey; no /.well-known/oauth-authorization-server on either host (404)
+- id: oidc
+  name: OpenID Connect
+  conforms: false
+  evidence: /.well-known/openid-configuration 404 on agmsg.world and api.agmsg.world
+- id: rfc9728
+  name: OAuth 2.0 Protected Resource Metadata
+  conforms: false
+  evidence: /.well-known/oauth-protected-resource 404 on both hosts; the 402 challenge is x402, not RFC 9728
+- id: rfc9457
+  name: Problem Details for HTTP APIs
+  conforms: false
+  evidence: >-
+    The only documented error is 402 with no body schema; the live 402 body is {} (2 bytes) and the
+    machine-readable detail travels in the PAYMENT-REQUIRED header. Unmatched routes answer FastAPI's
+    default {"detail":"Not Found"}. No application/problem+json anywhere.
+- id: rfc9116
+  name: security.txt
+  conforms: false
+  evidence: /.well-known/security.txt 404 on both hosts; identity.json names a Security contactPoint (email only)
+- id: rfc9727
+  name: API Catalog (/.well-known/api-catalog)
+  conforms: false
+  evidence: 404 on both hosts
+- id: apis-json
+  name: APIs.json
+  conforms: false
+  evidence: /apis.json, /apis.yml and /.well-known/apis.json 404 on both hosts
+- id: idempotency
+  name: Idempotency-Key (draft-ietf-httpapi-idempotency-key-header)
+  conforms: false
+  evidence: no idempotency header, parameter or client-supplied id anywhere in the contract; see conventions/agmsg-world-conventions.yml
+- id: rfc8594
+  name: Sunset / Deprecation headers
+  conforms: false
+  evidence: no deprecated operations, no versioning or deprecation policy; developer-ai.txt says to poll openapi.json for change
+- id: ratelimit-headers
+  name: RateLimit header fields (draft-ietf-httpapi-ratelimit-headers)
+  conforms: false
+  evidence: no RateLimit-*/X-RateLimit-*/Retry-After observed on any response; developer-ai.txt states no rate limits are documented
+- id: json-api
+  name: JSON:API
+  conforms: false
+  evidence: plain JSON objects with success/message envelopes; no data/attributes/links shape

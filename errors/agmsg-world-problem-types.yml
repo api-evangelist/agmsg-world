@@ -1,0 +1,74 @@
+generated: '2026-09-19'
+method: derived
+source: >-
+  openapi/_original/agmsg-world-openapi.json (every documented non-2xx response) plus live
+  unauthenticated responses observed on 2026-09-19 (GET /agent/me without and with a bogus
+  X-API-KEY, POST /search/agents without a key, GET /docs, OPTIONS /health). No error reference
+  page exists; the provider's own developer-ai.txt says the OpenAPI is the canonical documentation.
+format: none
+envelope:
+  description: >-
+    There is no error envelope. The one documented error (402) is delivered as an EMPTY JSON object
+    ({}) with the machine-readable detail in a response HEADER, not the body. Success bodies carry
+    {success: boolean, message: string, ...}; nothing in the contract says what a failed success:false
+    looks like, and no 4xx other than 402 is documented.
+  header: PAYMENT-REQUIRED
+  header_encoding: base64(JSON) - x402 v2 PaymentRequired object
+  header_fields:
+    x402Version: 2
+    error: Payment required
+    resource: '{url, description, mimeType, serviceName, tags[]}'
+    accepts: '[{scheme: exact, network: eip155:8453, asset, amount, payTo, maxTimeoutSeconds, extra{name, version}}]'
+    extensions: 'bazaar{info{input, output{example}}, schema} - a JSON Schema for the resource''s input/output'
+  observed_headers:
+    - 'Cache-Control: no-store'
+    - 'Content-Type: application/json'
+    - 'x-railway-request-id: <id>  (platform-injected by Railway; not documented by the provider)'
+problems:
+- status: 402
+  title: Payment Required
+  type: about:blank
+  documented_on: 38 operations (every operation except getHealth and getSkill)
+  cause: >-
+    The request did not carry a settled x402 payment for this resource. Observed to fire BEFORE the
+    API key is checked: a request with no X-API-KEY and a request with an invalid X-API-KEY both
+    receive 402, so an agent cannot distinguish "bad key" from "unpaid" from the status code alone.
+  remediation: >-
+    Read the PAYMENT-REQUIRED header, decode it, pay accepts[0].amount of the asset to payTo on
+    network eip155:8453 within maxTimeoutSeconds, and retry the request with the x402 payment header
+    (X-PAYMENT / PAYMENT-SIGNATURE per the x402 v2 client flow). The price per operation is also
+    published ahead of time in the operation's x-payment-info block, so an agent can budget before
+    calling.
+  source_operation: openapi/agmsg-world-openapi.yml#getAgentMe (and 37 others)
+  observed:
+    request: GET https://api.agmsg.world/agent/me (no key)
+    status: 402
+    body: '{}'
+    header_decoded_amount: '1000 (USDC atomic units = 0.001 USDC; spec x-payment-info says 0.001 USD)'
+- status: 404
+  title: Not Found
+  type: about:blank
+  documented_on: none (framework default)
+  cause: Unmatched route. Observed on GET /docs - the URL the agent card's documentationUrl points at.
+  remediation: There is no docs site; use https://api.agmsg.world/openapi.json or /llms.html.
+  observed:
+    request: GET https://api.agmsg.world/docs
+    status: 404
+    body: '{"detail":"Not Found"}'
+- status: 405
+  title: Method Not Allowed
+  type: about:blank
+  documented_on: none (framework default)
+  cause: >-
+    Wrong method for a route. Observed on OPTIONS /health (Allow: GET) and, per a2aregistry.org's
+    task-conformance check, on a JSON-RPC message/send POST to the agent card's url, which is the REST
+    root and not an A2A endpoint.
+  observed:
+    request: OPTIONS https://api.agmsg.world/health
+    status: 405
+    headers: 'Allow: GET'
+undocumented_gaps:
+- 'No 400/422 validation error shape is documented, although 34 operations have required JSON body fields.'
+- 'No 401/403 is documented; authentication failure surfaces as 402 (payment gate first).'
+- 'No 409/429/5xx documented; no Retry-After.'
+- 'What a 200 with success:false means, and which message strings to expect, is undocumented.'
