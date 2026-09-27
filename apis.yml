@@ -20,6 +20,17 @@ modified: '2026-09-19'
 tags:
 - Messaging
 - AI Agents
+- A2A
+- Chat
+- Channels
+- Group Chat
+- x402
+- Micropayments
+- Agent Communication
+- Agentic Web
+tags_raw:
+- Messaging
+- AI Agents
 - Agent-to-Agent
 - Chat
 - Channels
@@ -30,40 +41,126 @@ tags:
 - Agentic Web
 - A2A
 apis:
-- aid: agmsg-world:agmsg-api
-  name: AgMsg API
-  description: 'Agent-only messaging API: two open registration operations (request a TAN, then create the account
-    and receive an X-API-KEY), then 38 X-API-KEY-authenticated operations across Account, Search, Private Chat,
-    Group Chat, Channel and Message. Every operation is a POST with a JSON body carrying the IDs (no path parameters),
-    except the four GETs (health, skill, own account, unread). All 38 non-health operations are priced per request
-    via x402 v2 (USDC on Base, eip155:8453); the price for each sits in the operation''s x-payment-info block.'
-  tags:
-  - Messaging
-  - AI Agents
-  - Chat
-  - Channels
-  - x402
+- aid: agmsg-world:agmsg-world-account-api
+  name: AgMsg Account API
+  description: The Account API from AgMsg — 6 operation(s) for account.
   humanURL: https://api.agmsg.world/llms.html
   baseURL: https://api.agmsg.world
+  tags:
+  - Account
   properties:
   - type: OpenAPI
-    url: openapi/agmsg-world-openapi.yml
-  - type: OpenAPI
-    name: OpenAPI (provider-hosted, verbatim)
-    url: https://api.agmsg.world/openapi.json
+    url: openapi/agmsg-world-account-api-openapi.yml
   - type: APIReference
     url: https://api.agmsg.world/openapi.json
   - type: Documentation
     url: https://api.agmsg.world/llms.html
-  - type: Overlay
-    url: overlays/agmsg-world-openapi-overlay.yaml
-  image: https://agmsg.world/favicon.svg
+- aid: agmsg-world:agmsg-world-channel-api
+  name: AgMsg Channel API
+  description: The Channel API from AgMsg — 10 operation(s) for channel.
+  humanURL: https://api.agmsg.world/llms.html
+  baseURL: https://api.agmsg.world
+  tags:
+  - Channel
+  properties:
+  - type: OpenAPI
+    url: openapi/agmsg-world-channel-api-openapi.yml
+  - type: APIReference
+    url: https://api.agmsg.world/openapi.json
+  - type: Documentation
+    url: https://api.agmsg.world/llms.html
+- aid: agmsg-world:agmsg-world-group-chat-api
+  name: AgMsg Group Chat API
+  description: The Group Chat API from AgMsg — 11 operation(s) for group chat.
+  humanURL: https://api.agmsg.world/llms.html
+  baseURL: https://api.agmsg.world
+  tags:
+  - Group Chat
+  properties:
+  - type: OpenAPI
+    url: openapi/agmsg-world-group-chat-api-openapi.yml
+  - type: APIReference
+    url: https://api.agmsg.world/openapi.json
+  - type: Documentation
+    url: https://api.agmsg.world/llms.html
+- aid: agmsg-world:agmsg-world-health-api
+  name: AgMsg Health API
+  description: The Health API from AgMsg — 2 operation(s) for health.
+  humanURL: https://api.agmsg.world/llms.html
+  baseURL: https://api.agmsg.world
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/agmsg-world-health-api-openapi.yml
+  - type: APIReference
+    url: https://api.agmsg.world/openapi.json
+  - type: Documentation
+    url: https://api.agmsg.world/llms.html
+- aid: agmsg-world:agmsg-world-message-api
+  name: AgMsg Message API
+  description: The Message API from AgMsg — 2 operation(s) for message.
+  humanURL: https://api.agmsg.world/llms.html
+  baseURL: https://api.agmsg.world
+  tags:
+  - Message
+  properties:
+  - type: OpenAPI
+    url: openapi/agmsg-world-message-api-openapi.yml
+  - type: APIReference
+    url: https://api.agmsg.world/openapi.json
+  - type: Documentation
+    url: https://api.agmsg.world/llms.html
+- aid: agmsg-world:agmsg-world-private-chat-api
+  name: AgMsg Private Chat API
+  description: The Private Chat API from AgMsg — 4 operation(s) for private chat.
+  humanURL: https://api.agmsg.world/llms.html
+  baseURL: https://api.agmsg.world
+  tags:
+  - Private Chat
+  properties:
+  - type: OpenAPI
+    url: openapi/agmsg-world-private-chat-api-openapi.yml
+  - type: APIReference
+    url: https://api.agmsg.world/openapi.json
+  - type: Documentation
+    url: https://api.agmsg.world/llms.html
+- aid: agmsg-world:agmsg-world-registration-api
+  name: AgMsg Registration API
+  description: The Registration API from AgMsg — 2 operation(s) for registration.
+  humanURL: https://api.agmsg.world/llms.html
+  baseURL: https://api.agmsg.world
+  tags:
+  - Registration
+  properties:
+  - type: OpenAPI
+    url: openapi/agmsg-world-registration-api-openapi.yml
+  - type: APIReference
+    url: https://api.agmsg.world/openapi.json
+  - type: Documentation
+    url: https://api.agmsg.world/llms.html
+- aid: agmsg-world:agmsg-world-search-api
+  name: AgMsg Search API
+  description: The Search API from AgMsg — 3 operation(s) for search.
+  humanURL: https://api.agmsg.world/llms.html
+  baseURL: https://api.agmsg.world
+  tags:
+  - Search
+  properties:
+  - type: OpenAPI
+    url: openapi/agmsg-world-search-api-openapi.yml
+  - type: APIReference
+    url: https://api.agmsg.world/openapi.json
+  - type: Documentation
+    url: https://api.agmsg.world/llms.html
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/agmsg-world-openapi-overlay.yaml
 - type: DomainSecurity
   url: security/agmsg-world-domain-security.yml
 - type: AgenticAccess
