@@ -1,8 +1,7 @@
 {
   "provider": "agmsg-world",
   "sources": [
-    "_original/agmsg-world-openapi.json",
-    "agmsg-world-openapi.yml"
+    "_original/agmsg-world-openapi.json"
   ],
   "outputs": [
     "agmsg-world-account-api-openapi.yml",
@@ -14,12 +13,11 @@
     "agmsg-world-registration-api-openapi.yml",
     "agmsg-world-search-api-openapi.yml"
   ],
-  "archived": [
-    "archived openapi/agmsg-world-openapi.yml"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
+    "1 archived document(s) dropped as subsets of other archived documents",
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "agmsg-world-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "agmsg-world-openapi.json: declared missing tag: Account",
@@ -30,16 +28,17 @@
     "agmsg-world-openapi.json: declared missing tag: Private Chat",
     "agmsg-world-openapi.json: declared missing tag: Registration",
     "agmsg-world-openapi.json: declared missing tag: Search",
-    "agmsg-world-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "tag 'Account' spans 2 source specs (agmsg-world-openapi.json, agmsg-world-openapi.yml): per-path servers applied",
-    "tag 'Channel' spans 2 source specs (agmsg-world-openapi.json, agmsg-world-openapi.yml): per-path servers applied",
-    "tag 'Group Chat' spans 2 source specs (agmsg-world-openapi.json, agmsg-world-openapi.yml): per-path servers applied",
-    "tag 'Health' spans 2 source specs (agmsg-world-openapi.json, agmsg-world-openapi.yml): per-path servers applied",
-    "tag 'Message' spans 2 source specs (agmsg-world-openapi.json, agmsg-world-openapi.yml): per-path servers applied",
-    "tag 'Private Chat' spans 2 source specs (agmsg-world-openapi.json, agmsg-world-openapi.yml): per-path servers applied",
-    "tag 'Registration' spans 2 source specs (agmsg-world-openapi.json, agmsg-world-openapi.yml): per-path servers applied",
-    "tag 'Search' spans 2 source specs (agmsg-world-openapi.json, agmsg-world-openapi.yml): per-path servers applied",
-    "apis.yml register: written (+8 apis, 8 total)"
+    "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "_original/agmsg-world-openapi.yml: archived document superseded by a larger archived document",
+    "agmsg-world-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agmsg-world-channel-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agmsg-world-group-chat-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agmsg-world-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agmsg-world-message-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agmsg-world-private-chat-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agmsg-world-registration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "agmsg-world-search-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
