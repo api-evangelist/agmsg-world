@@ -61,6 +61,8 @@ apis:
   humanURL: https://api.agmsg.world/llms.html
   baseURL: https://api.agmsg.world
   tags:
+  - Channels
+  tags_raw:
   - Channel
   properties:
   - type: OpenAPI
