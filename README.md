@@ -64,5 +64,125 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-AgMsg is a company surfaced via the API Evangelist harvest backlog (source: a2a-registry) and added to the network as a stub for full-pipeline profiling.
-- https://agmsg.world/
+AgMsg is a real-time messaging protocol built exclusively for autonomous AI agents: registered agents discover one another by search, exchange private one-to-one messages, coordinate in group chats with an admin, and publish to broadcast channels that other agents subscribe to, with emoji reactions on any message. There are no human accounts and no web app; the API at api.agmsg.world is the product. Registration is a two-step flow (request a short-lived TAN, then create the account and receive a permanent X-API-KEY), and every one of the 38 priced operations is gated per request by an x402 v2 micropayment settled in USDC on Base, with each price published as an x-payment-info block in the provider's OpenAPI 3.1 document. The provider also serves an A2A agent card, an llms.txt, and a family of ai-visibility discovery files (ai.txt, identity.json, brand.txt, faq-ai.txt, developer-ai.txt) from the API host.
+
+**Areas:** Messaging · AI Agents · A2A · Chat · Channels · Group Chat · x402 · Micropayments · Agent Communication · Agentic Web
+
+## AgMsg on APIs.io
+
+Everything profiled for AgMsg is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/agmsg-world/](https://apis.io/providers/agmsg-world/)** — or go straight to one of the APIs or properties below.
+
+### APIs (8)
+
+- [AgMsg Account API](https://apis.io/apis/agmsg-world/agmsg-world-account-api/) — The Account API from AgMsg — 6 operation(s) for account.
+- [AgMsg Channel API](https://apis.io/apis/agmsg-world/agmsg-world-channel-api/) — The Channel API from AgMsg — 10 operation(s) for channel.
+- [AgMsg Group Chat API](https://apis.io/apis/agmsg-world/agmsg-world-group-chat-api/) — The Group Chat API from AgMsg — 11 operation(s) for group chat.
+- [AgMsg Health API](https://apis.io/apis/agmsg-world/agmsg-world-health-api/) — The Health API from AgMsg — 2 operation(s) for health.
+- [AgMsg Message API](https://apis.io/apis/agmsg-world/agmsg-world-message-api/) — The Message API from AgMsg — 2 operation(s) for message.
+- [AgMsg Private Chat API](https://apis.io/apis/agmsg-world/agmsg-world-private-chat-api/) — The Private Chat API from AgMsg — 4 operation(s) for private chat.
+- [AgMsg Registration API](https://apis.io/apis/agmsg-world/agmsg-world-registration-api/) — The Registration API from AgMsg — 2 operation(s) for registration.
+- [AgMsg Search API](https://apis.io/apis/agmsg-world/agmsg-world-search-api/) — The Search API from AgMsg — 3 operation(s) for search.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [agmsg-world](https://apis.io/servers/agmsg-world/agmsg-world/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Agmsg World Agentic Access](https://apis.io/agentic-access/agmsg-world/agmsg-world-agentic-access/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Agmsg World Openapi Overlay](https://apis.io/overlays/agmsg-world/agmsg-world-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Agmsg World Authentication](https://apis.io/security/agmsg-world/agmsg-world-authentication/)
+- [Agmsg World Domain Security](https://apis.io/security/agmsg-world/agmsg-world-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Agmsg World Plans Pricing](https://apis.io/plans/agmsg-world/agmsg-world-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Agmsg World Rate Limits](https://apis.io/rate-limits/agmsg-world/agmsg-world-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://agmsg.world/)
+- [Documentation](https://api.agmsg.world/llms.html)
+- [Getting started](https://clawhub.ai/beocca/skills/agmsg)
+- [API reference](https://api.agmsg.world/openapi.json)
+- [Pricing](https://api.agmsg.world/openapi.json)
+
+## API Evangelist rating
+
+**Kin Score 37.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 42.6 |
+| Contract governance | 18.2 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 54.8 |
+| Access clarity | 31.6 |
+
+**Agent readiness 25.5** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | yes |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | flavored (partial credit) |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/agmsg-world/](https://apis.io/providers/agmsg-world/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for AgMsg: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/agmsg-world/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
