@@ -97,32 +97,38 @@ Model Context Protocol servers that expose the API to agents.
 
 Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Agmsg World Agentic Access](https://apis.io/agentic-access/agmsg-world/agmsg-world-agentic-access/)
+- [AgMsg Agentic Access](https://apis.io/agentic-access/agmsg-world/agmsg-world-agentic-access/)
 
 #### Overlays (1)
 
 OpenAPI overlays, including conversational phrasing for each operation.
 
-- [Agmsg World Openapi Overlay](https://apis.io/overlays/agmsg-world/agmsg-world-openapi-overlay/)
+- [AgMsg Openapi Overlay](https://apis.io/overlays/agmsg-world/agmsg-world-openapi-overlay/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [AgMsg API Rules](https://apis.io/rules/agmsg-world/agmsg-world-rules/)
 
 #### Security (2)
 
 Authentication, trust centre, and vulnerability disclosure.
 
-- [Agmsg World Authentication](https://apis.io/security/agmsg-world/agmsg-world-authentication/)
-- [Agmsg World Domain Security](https://apis.io/security/agmsg-world/agmsg-world-domain-security/)
+- [AgMsg Authentication](https://apis.io/security/agmsg-world/agmsg-world-authentication/)
+- [AgMsg Domain Security](https://apis.io/security/agmsg-world/agmsg-world-domain-security/)
 
 #### Plans and pricing (1)
 
 Published plans, tiers and prices.
 
-- [Agmsg World Plans Pricing](https://apis.io/plans/agmsg-world/agmsg-world-plans-pricing/)
+- [AgMsg Plans Pricing](https://apis.io/plans/agmsg-world/agmsg-world-plans-pricing/)
 
 #### Rate limits (1)
 
 Published request limits.
 
-- [Agmsg World Rate Limits](https://apis.io/rate-limits/agmsg-world/agmsg-world-rate-limits/)
+- [AgMsg Rate Limits](https://apis.io/rate-limits/agmsg-world/agmsg-world-rate-limits/)
 
 ## Where to find this API
 
@@ -136,18 +142,18 @@ Links to the company's own pages. This repository publishes no copy of their spe
 
 ## API Evangelist rating
 
-**Kin Score 37.5** — thin · rubric 0.24.0 · scored 2026-10-17
+**Kin Score 37.7** — thin · rubric 0.28.1 · scored 2026-11-21
 
 | Facet | Score |
 |---|---|
-| Discoverability | 78.6 |
-| Contract quality | 42.6 |
-| Contract governance | 18.2 |
+| Discoverability | 73.2 |
+| Contract quality | 47.3 |
+| Contract governance | 31.8 |
 | Operational transparency | 0.0 |
 | Developer ergonomics | 54.8 |
-| Access clarity | 31.6 |
+| Access clarity | 25.5 |
 
-**Agent readiness 25.5** — agent-aware
+**Agent readiness 26.6** — agent-aware
 
 | Agent-readiness dimension | Result |
 |---|---|
@@ -170,8 +176,14 @@ Links to the company's own pages. This repository publishes no copy of their spe
 | Protected Resource Metadata | — |
 | Dynamic Client Registration | — |
 | Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+| MCP Tool Quality | na |
+| Onboarding Descriptor | — |
+| Dns Aid Index | na |
+| Markdown Negotiation | na |
 
-**Regulatory alignment 16.7** — Horizontal (data, software, accessibility, platform)
+**Regulatory alignment 10.8** — Horizontal (data, software, accessibility, platform)
 
 The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/agmsg-world/](https://apis.io/providers/agmsg-world/).
 
